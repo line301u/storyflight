@@ -1,0 +1,36 @@
+---
+import { getData } from '../helpers/dataFetching.js';
+
+
+const pagesData = await getData("pages", "forside");
+
+---
+
+<section id="text-block" class="section-padding">
+    <div class="text-block-wrap container container--small">
+        <h1 class="caption">{pagesData["acf"].catch_phrase}</h1>
+        <p>{pagesData["acf"].text_block}</p>
+    </div>
+</section>
+
+<style lang="scss">
+section{
+    background: var(--clr-grey);
+}
+.text-block-wrap {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    @media (min-width: 992px) {
+            flex: 1;
+            flex-direction: row;
+            gap: 4rem;
+      }
+    h1, p {
+        @media (min-width: 992px) {
+            flex: 1;
+            color: var(--clr-secondary);
+      }
+    }
+}
+</style>

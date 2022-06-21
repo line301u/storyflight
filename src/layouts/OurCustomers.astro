@@ -1,0 +1,65 @@
+---
+import Logos from '../components/CustomerLogos.svelte';
+import { getData } from '../helpers/dataFetching.js';
+const customersData = await getData("pages", "forside");
+const customerLogos = await getData("customerLogo");
+
+---
+
+<section class="container container--small section--padding">
+    <h2>{customersData["acf"].title}</h2>
+    <div class="customer-container">
+    <div class="gradient-container"></div>
+    <div class="carousel">
+    <Logos client:visible customerLogos={customerLogos}/>
+    </div>
+    </div>
+</section>
+
+
+<style lang="scss">
+section{
+    padding-left: 0;
+    padding-right: 0;
+
+    h2{
+        text-align: center;
+        margin: 0 auto 2rem;
+        color: var(--clr-secondary);
+    }
+
+    .customer-container{ 
+        width: 100%;
+        display:block;
+        overflow:hidden;
+        position: relative;
+
+    .gradient-container{
+        background: linear-gradient(90deg,#ffffff 3%,rgb(255 255 255 / 0%) 13%,rgb(255 255 255 / 0%) 50%,rgb(255 255 255 / 0%) 87%,#ffffff 97%);
+        position: absolute;
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        @media (min-width: 992px) {
+        display: none;
+      }
+    }
+    
+    .carousel{   
+        display: flex;
+        width: 100%;
+        height: 300px;
+        overflow-x: scroll;
+        position: relative;
+        @media (min-width: 992px) {
+        justify-content: center;
+        height: 400px
+      }
+    }
+
+}
+}
+
+
+</style>

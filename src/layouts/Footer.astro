@@ -1,0 +1,24 @@
+---
+
+import Footer from '../components/Footer.svelte';
+import {getData} from '../helpers/dataFetching.js';
+
+const footerData = await getData("menus", "contactInformation")
+
+---
+
+
+<footer>
+    <Footer client:load footerData={footerData}/>
+</footer>
+
+<style lang="scss">
+
+footer{
+    background: var(--clr-secondary);
+    position: relative;
+    overflow: hidden;
+    padding: var( --gutter);
+}
+
+</style>

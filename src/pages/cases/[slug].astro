@@ -1,0 +1,40 @@
+---
+import { getData } from '../../helpers/dataFetching.js';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VideoPlayer from '../../components/VideoPlayer.svelte';
+
+export async function getStaticPaths() {
+  const cases = await getData('cases');
+  const chosenCases = await getData('chosenCases');
+  const allCases = [...cases, ...chosenCases];
+
+  return allCases.map((casePost) => {
+    return {
+      params: { slug: casePost.slug },
+      props: { casePost }
+    }
+  })
+}
+
+const { casePost } = Astro.props;
+const videoTypesData = await getData('videoTypes');
+
+const videoTypeIDs = casePost.videotypes.filter(id => id !== 11);
+const videoType = videoTypesData.find(type => type.id === videoTypeIDs[0]);
+
+---
+<BaseLayout 
+  pageContent={casePost} 
+  includeHeader={false} 
+  includeFooter={false}
+  includeCursor={false}
+>
+  <VideoPlayer 
+    client:load
+    title={casePost['case_title']} 
+    description={casePost['case_description']}
+    videoType={videoType.name}
+    videoSrc={casePost['case_video'].guid}
+    posterImage={casePost['case_image'].guid}
+  />
+</BaseLayout>

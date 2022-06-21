@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getData } from '../../helpers/dataFetching.js';
+import Cases from '../../components/Cases.svelte';
+
+// SEO
+const pageData = await getData('pages', 'cases');
+
+const cases = await getData('cases');
+const chosenCases = await getData('chosenCases');
+const allCases = [...cases, ...chosenCases];
+const videoTypes = await getData('videoTypes');
+
+const { canonicalURL } = Astro.request;
+
+---
+
+
+
+<BaseLayout pageContent={pageData}>
+
+  <Cases 
+    title={pageData.title.rendered}
+    client:load 
+    cases={allCases} 
+    videoTypes={videoTypes} 
+    canonicalURL={canonicalURL} 
+  />
+</BaseLayout>
+
+<style>
+
+  body {
+    padding-top: 70px;
+  }
+
+</style>

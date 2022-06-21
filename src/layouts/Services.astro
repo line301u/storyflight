@@ -1,0 +1,29 @@
+---
+import SeeMoreButton from "../components/SeeMoreButton.svelte";
+import ServicesItem from "../components/ServicesItem.svelte";
+import {getData} from '../helpers/dataFetching.js';
+
+
+const servicesPageData = await getData("pages", "viTilbyder");
+const servicesData = await getData("services");
+
+  
+---
+
+<section class="services-section">
+
+
+<ServicesItem client:load servicesData={servicesData}/>
+<SeeMoreButton pageData={servicesPageData}/>
+ 
+</section>
+
+
+  <style lang="scss">
+  .services-section{
+    background: var(--clr-secondary);
+    color: white;
+    padding-bottom: 0;
+    
+  }
+  </style>

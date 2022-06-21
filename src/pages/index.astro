@@ -1,0 +1,24 @@
+---
+import { getData } from '../helpers/dataFetching.js'
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TextBlock from '../layouts/TextBlock.astro';
+import OurCustomers from '../layouts/OurCustomers.astro';
+import ChosenCases from '../layouts/ChosenCases.astro';
+import HeroBanner from '../layouts/HeroBanner.astro';
+import ContactSection from '../layouts/ContactSection.astro';
+
+
+// SEO
+const pageData = await getData('pages', 'forside');
+
+
+const pageType = "forside";
+---
+  
+<BaseLayout pageContent={pageData}>
+  <HeroBanner />
+  <TextBlock />
+  <ChosenCases />
+  <OurCustomers />
+  <ContactSection pageType={pageType} />
+</BaseLayout>

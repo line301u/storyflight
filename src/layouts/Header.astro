@@ -1,0 +1,36 @@
+---
+import Logo from '../components/AnimatingLogo.svelte';
+import Menu from '../components/Menu.svelte';
+import {getData} from '../helpers/dataFetching.js';
+
+const menuData = await getData("menus", "primaryMenu");
+const soMeData = await getData("menus", "contactInformation");
+
+---
+<header class="header color-blend">
+  <a href="/" class="logo-link">
+    <Logo client:load/>
+    <span class="visually-hidden">Gå til forsiden</span>
+  </a>
+  <Menu client:load menuData={menuData} soMeData={soMeData}/>
+</header>
+
+<style lang="scss">
+header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  z-index: 10;
+}
+
+.logo-link {
+  color: var(--clr-black);
+  display: flex;
+  align-items: center;
+  z-index: 5;
+}
+</style>

@@ -1,0 +1,87 @@
+---
+import {getData} from '../helpers/dataFetching.js';
+
+const servicesTopData = await getData("pages", "viTilbyder");
+const servicesTopImage = await getData("servicesImage");
+
+const { acf: { 
+  heading: title, 
+  text: body,
+}} = servicesTopData;
+
+console.log(servicesTopImage[0].services_image)
+---
+
+<section class="container container--medium top-section-wrapper">
+    <div class="section top-section">
+    <div class="textwrapper">
+    <h1>{title}</h1>
+    <p>{body}</p>
+    </div>
+    <div class="img-wrapper">
+        <img alt={servicesTopImage[0].services_image.post_title} src={servicesTopImage[0].services_image.guid}  loading="lazy"/> 
+    </div>
+    </div>
+</section>
+
+<style lang="scss">
+.top-section-wrapper{
+    overflow: hidden;
+    width: 100%;
+    @media (min-width: 992px) {
+    overflow: unset;
+    }
+    .top-section{
+        @media (min-width: 992px) {
+        display: grid;
+        grid-template-areas:
+            "h1 img"
+            "p img";
+        grid-template-columns: 50% 50%;
+          @media (min-width: 992px) {
+           padding-top: 4rem;
+        }
+
+    }
+    h1{
+        margin-bottom: var(--gutter);
+        grid-area: h1;
+        color: var(--clr-secondary);
+    }
+    p{
+        grid-area: p;
+        color: var(--clr-secondary);
+    }
+    .img-wrapper{
+        position:relative;
+        clip-path: polygon(18% 0%, 100% 0%, 82% 100%, 0% 100%);
+        height: 35vh;
+        width: 700px !important;
+        grid-area: img;
+        margin-top: 4rem;
+        img{
+            position: absolute;
+            // height: 40vh;
+            object-fit: cover;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-position: center left;
+        } 
+         @media (min-width: 600px) {
+            transform: translateX(200px) scale(1.5,1.5);
+            margin-top: 8rem;
+            
+        }
+         @media (min-width: 992px) {
+            transform: translateX(360px) scale(1.8,1.8);
+             margin-top: 4rem;
+            align-self: center;
+        }
+    }
+    
+}
+}
+
+
+</style>

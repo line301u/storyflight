@@ -1,0 +1,23 @@
+---
+import { getData } from '../helpers/dataFetching.js';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Services from '../layouts/Services.astro'
+import ImageAndText from '../layouts/ImageAndText.astro';
+import ContactSection from '../layouts/ContactSection.astro';
+
+
+// SEO
+const pageData = await getData('pages', 'viTilbyder');
+
+
+const pageType = "viTilbyder";
+---
+
+
+<BaseLayout pageContent={pageData}>
+    <ImageAndText />
+    <Services />
+    <ContactSection pageType={pageType} />
+</BaseLayout>
+
+

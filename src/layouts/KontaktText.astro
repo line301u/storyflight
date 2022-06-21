@@ -1,0 +1,46 @@
+---
+import {getData} from '../helpers/dataFetching.js';
+
+const kontaktData = await getData("pages", "kontakt");
+
+
+const { acf: { 
+  "contact_info_heading": title, 
+  "contact_info_text": body,
+  email,
+  "phone_number": phoneNumber 
+}} = kontaktData;
+
+---
+
+    <div>
+        <h1 class="caption">{title}</h1>
+        <p>{body}</p>
+        <div class="kontakt-details">
+        <a class="h3 links-hover" href="tel:${phoneNumber}">{phoneNumber}</a>
+        <a class="h3 links-hover" href="mailto:${email}">{email}</a>
+        </div>
+    </div>
+
+<style lang="scss">
+
+h1{
+    margin-bottom: 1.5rem;
+    color: var(--clr-secondary);
+}
+p{
+    color: var(--clr-secondary);
+}
+
+.kontakt-details{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3.3rem;
+    a, a:visited{
+      color: var(--clr-secondary);
+    }
+    
+}  
+
+
+</style>

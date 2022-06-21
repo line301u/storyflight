@@ -1,0 +1,24 @@
+---
+import ContactSection from "../components/ContactSection.svelte";
+import {getData} from '../helpers/dataFetching.js';
+
+const { pageType } = Astro.props;
+
+const Videos = await getData("cases")
+const pageData = await getData("pages", pageType)
+
+---
+
+
+<section class={`${pageData.slug}-contact-section`}> 
+    <ContactSection client:visible pageData={pageData} Videos={Videos}/>
+</section>
+
+<style lang="scss">
+section {
+    width: 100%;
+    height: 500px;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+</style>

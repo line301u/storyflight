@@ -1,0 +1,23 @@
+---
+import {getData} from '../helpers/dataFetching.js';
+import HeroContent from "../components/HeroContent.svelte";
+const cases = await getData('cases');
+const videoTypes = await getData('videoTypes');
+---
+
+<section class="hero-banner">
+	<HeroContent client:load {cases} {videoTypes}/>
+</section>
+
+<style lang="scss">
+.hero-banner{
+    padding: 0;
+    :global(.swiper) {
+    height: 80vh;
+    width: 100vw;
+        @media (min-width: 992px) {
+            height: 100vh;
+        }
+    }
+}
+</style>

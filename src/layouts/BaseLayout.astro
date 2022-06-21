@@ -1,0 +1,162 @@
+---
+import { SETTINGS } from '../helpers/dataFetching.js';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Cursor from '../components/Cursor.svelte';
+import Preloader from '../components/Preloader.svelte';
+
+const { 
+  pageContent = undefined, 
+  includeHeader = true, 
+  includeFooter = true,
+  includeCursor = true,
+} = Astro.props;
+
+const url = Astro.site.hostname;
+
+const SEO = pageContent ? pageContent.yoast_head : undefined;
+
+---
+
+
+<html lang="da-DK">
+  <head>
+  <!-- PRELOADER STYLESHEET -->
+  <style>
+   
+
+    :global(.preloader){
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: var(--clr-secondary);
+    z-index: 11;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    }
+    :global(.underlay-container){
+        height: 70px;
+        width: 138px;   
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);     
+    }
+
+     @media (min-width: 768px) {
+        :global(.underlay-container){
+          width: 198px;
+          height: 100px;
+          }
+        }
+        :global(.underlay-wrap){
+          position: relative;
+          height: 100%;
+          width: 100%;
+        }
+        :global(.logo-underlay){
+        height: 100%;
+        width: 100%;
+        background: var(--clr-white);
+        opacity: 0.3;
+        position: absolute;
+        top: 0;
+        }
+        :global(.logo-color-change){
+        height: 100%;
+        width: 100%;
+        background: var(--clr-primary);
+        position: absolute;
+        bottom: 0;
+        transform-origin: bottom;
+        transform: scaleY(0);
+        animation: changeHeight 5s linear 1s 1 forwards, loading 1s ease-in 6s infinite alternate;
+        }
+        :global(.preloader .logo-wrap){
+            height: auto;
+            width: 140px;
+            position: relative;
+        }
+         @media (min-width: 768px) {
+           :global(.preloader .logo-wrap){
+                width: 200px;
+              }
+            }
+            
+            :global(.preloader .logo){
+            height: auto;
+            width: 140px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            clip-path: url("#my-clip");
+        }
+         @media (min-width: 768px) {
+           :global(.preloader .logo){
+                width: 200px;
+              }
+            }
+
+          :global(.loading-text){
+            position: absolute;
+            top: 57%;
+            color: var(--clr-primary);
+          }
+           @media (min-width: 768px) {
+              :global(.loading-text){
+              top: 59.7%;
+                }
+            }
+
+
+</style> 
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href={Astro.resolve('../styles/global.scss')} />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin/>
+    <link rel="preload" href="https://use.typekit.net/qms3myj.css" as="style"/>
+    <link rel="stylesheet" href="https://use.typekit.net/qms3myj.css" />
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff5a44">
+    <meta name="msapplication-TileColor" content="#ff5a44">
+    <meta name="theme-color" content="#ff5a44">
+
+    <!-- SEO-->
+    <!-- {typeof SEO == 'string' ? SEO.replaceAll(SETTINGS.baseUrl, url) : <title>Storyflight</title>} -->
+
+  </head>
+  <body>
+    <Preloader client:load/>
+
+    {includeCursor && <Cursor client:load/>}
+
+    {includeHeader && <Header/>}
+
+
+    <main>
+      <!-- slot: your page content will be injected here. -->
+      <slot />
+    </main>
+
+    {includeFooter && <Footer/>}
+  </body>
+</html>
+
+<style lang="scss">
+  main {
+    isolation: isolate;
+  }
+</style>

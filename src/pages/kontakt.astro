@@ -1,0 +1,106 @@
+---
+import { getData } from '../helpers/dataFetching.js';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import KontaktText from '../layouts/KontaktText.astro';
+import KontaktForm from '../components/KontaktForm.svelte';
+
+const pageData = await getData('pages', 'kontakt');
+---
+
+<BaseLayout pageContent={pageData}>
+
+    <section class="kontakt-section container--small">
+
+        <section class="container container--xsmall section-padding text-section">
+            <KontaktText />
+        </section>
+
+        <svg class="separation_line" width="210" height="456" viewBox="0 0 245 456" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line opacity="1" x1="240.479" y1="2.31822" x2="4.42951" y2="453.407" stroke="#000000" stroke-width="10"/>
+        </svg>
+        
+        <section class="container container--xsmall section-padding form-section">
+        <div class="form-wrap">
+            <h3>Kontakt os</h3>
+            <KontaktForm />
+        </div>
+        </section>
+
+    </section>
+</BaseLayout>
+
+<style lang="scss">
+@media (max-width: 991px){
+    .container--xsmall{
+        max-width: 100%;
+    }
+}
+.kontakt-section{
+    padding-bottom: 0;
+    margin: 0 auto;
+    
+    @media (min-width: 768px) {
+    padding-top: 3rem;
+    }
+        @media (min-width: 992px) {
+        display: flex;
+        justify-content: space-between;
+        height: 100vh;
+        gap: 300px;
+    }
+  .text-section{
+    margin: 0;
+        @media (min-width: 992px){
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+    }
+    .separation_line{
+      display: none;
+        @media (min-width: 992px) {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.05;
+      }
+    }
+    .form-section{
+    background: var(--clr-secondary);
+    margin: 0;
+
+    @media (min-width: 992px){
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        display: flex;
+        align-items: flex-end;
+        padding: 0;
+    }
+        .form-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @media (min-width: 992px){
+            width: 90%;     
+        }
+    }
+    
+
+        h3{
+            color: var(--clr-white);
+        }
+        @media (min-width: 992px) {
+        background: none;
+
+        h3{
+            color: var(--clr-secondary);
+        }
+    }
+}
+
+}
+
+</style>

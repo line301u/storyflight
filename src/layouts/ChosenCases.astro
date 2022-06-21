@@ -1,0 +1,114 @@
+---
+import {getData} from '../helpers/dataFetching.js';
+import CircleWithArrow from '../assets/icons/CircleWithArrow.svelte';
+import VideoSlider from '../components/VideoSlider.svelte';
+
+const chosenCasesData = await getData("chosenCases");
+const sectionData = await getData("pages", "forside");
+
+---
+
+<section class="chosen-cases">
+<h2 class="container container--large">{sectionData.acf["videoslider-heading"]}</h2>
+<VideoSlider client:load {chosenCasesData}/>
+ <div class="link container container--fluid">
+    <a class="links-hover" href="/cases">
+      <span class="a">{sectionData.acf["videoslider_button_text"]}</span>
+      <span class="arrow_icon"><CircleWithArrow /></span>
+    </a>
+  </div>
+</section>
+
+<style lang="scss">
+section {
+    background: var(--clr-secondary);
+    padding-bottom: 0rem;
+  @media (min-width: 768px) {
+    padding-bottom: 0rem;
+  }
+}
+
+.chosen-cases{
+  :global(.swiper-slide) {
+    flex-shrink: 0;
+    width: 400px !important;
+    @media (min-width: 768px) {
+          width: 700px !important;
+        }
+        @media (min-width: 1500px) {
+            width: 900px !important;
+        }
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    /* transform: translateX(130px); */
+    }
+    
+    :global(.swiper-button-next) {
+    background-image: url(../assets/icons/ArrowRight.svg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    height: 20px !important;
+    width: 20px !important;
+    top: 97.2% !important;
+    z-index: 2;
+    right: 1.5rem !important;
+    opacity: 0;
+    cursor: none
+    }
+
+    :global(.swiper-button-next::after) {
+     display: none;
+    }
+
+    :global(.swiper-button-prev) {
+    background-image: url(../assets/icons/ArrowLeft.svg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    height: 20px !important;
+    width: 20px !important;
+    top: 99% !important;
+    z-index: 2;
+    opacity: 0;
+    left: 1.5rem !important;
+    cursor: none;
+      @media (min-width: 700px) {
+      top: 97.2% !important;
+      }
+    }
+
+    :global(.swiper-button-prev::after) {
+        display: none;
+    }
+
+}
+
+h2 {
+  color: var(--clr-white);
+  margin-bottom: 2rem;
+}
+
+.link{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 2.5rem;
+    padding-bottom: 1.5rem;
+    @media (min-width: 768px) {
+    margin-top: 5.5rem;
+  }
+    a{
+      color: var(--clr-white);
+      display: flex;
+      align-items: center;
+    }
+    .arrow_icon{
+      margin-left: 1em;
+      color: var(--clr-primary);
+      display: flex;
+    }
+}
+
+</style>

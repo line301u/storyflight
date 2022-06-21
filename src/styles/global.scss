@@ -1,0 +1,399 @@
+@use 'normalize.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+:root {
+  // Colors
+  --clr-primary: #ff5a44;
+  --clr-secondary: #000217;
+  --clr-grey: #f9f9f9;
+  --clr-base-grey: 0, 0%, 98%;
+  --clr-white: #ffffff;
+  --clr-black: #000000;
+
+  // Font Families
+  --ff-headings: 'forma-djr-banner', sans-serif;
+  --ff-body: 'nunito-sans', sans-serif;
+
+  // Font sizes
+  --fs-h1: 3.125rem;
+  --fs-h2: 2.1875rem;
+  --fs-h3: 1.25rem;
+  --fs-caption: 2rem;
+  --fs-subtitle: 1rem;
+  --fs-p: 1rem;
+  --fs-a: 0.875rem;
+
+  // Font weights
+  --fw-h1: 800;
+  --fw-h2: 300;
+  --fw-h3: 300;
+  --fw-caption: 700;
+  --fw-subtitle: 700;
+  --fw-p: 300;
+  --fw-a: 600;
+
+  // Container
+  --gutter: 1.5rem;
+  --mw-xsm: 500px;
+  --mw-sm: 992px;
+  --mw-md: 1200px;
+  --mw-lg: 1400px;
+  // Prototype max widths
+  // --mw-md: 1330px;
+  // --mw-lg: 1656px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --fs-h1: 5.5rem;
+    --fs-h2: 4.2rem;
+    --fs-h3: 2.1875rem;
+    --fs-caption: 3.2rem;
+  }
+}
+
+h1,
+h2,
+h3,
+button,
+.h1,
+.h2,
+.h3,
+.button {
+  font-family: var(--ff-headings);
+  text-transform: uppercase;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+}
+
+h1,
+.h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-h1);
+  max-width: 15ch;
+  margin: 0;
+}
+
+h2,
+.h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-h2);
+  max-width: 25ch;
+}
+
+h3,
+.h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-h3);
+  max-width: 25ch;
+}
+
+.subtitle {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-subtitle);
+  font-family: var(--ff-headings);
+  font-style: italic;
+  line-height: 1.3;
+  max-width: 25ch;
+  text-transform: capitalize;
+}
+
+.caption {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-caption);
+  line-height: 1.2;
+  max-width: 25ch;
+  text-transform: unset;
+}
+
+body {
+  background: var(--clr-grey);
+  cursor: url(../assets/cursor.png), auto;
+}
+
+body,
+p {
+  font-family: var(--ff-body);
+  font-size: var(--fs-p);
+  font-weight: var(--fw-p);
+  line-height: 1.7;
+}
+
+main {
+  //fjern hvis denne generer dig -Signe:)
+  overflow-x: hidden;
+}
+
+a,
+.a {
+  font-size: var(--fs-a);
+  font-weight: var(--fw-a);
+  font-style: normal;
+  letter-spacing: 0.05rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: currentColor;
+  cursor: none;
+  font-family: var(--ff-headings);
+  transition: 0.3s;
+  span {
+    text-transform: uppercase;
+    font-weight: var(--fw-a);
+  }
+}
+
+p,
+li {
+  max-width: 65ch;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+::selection {
+  color: var(--clr-black);
+  background-color: var(--clr-primary);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--mw-md);
+  padding-right: var(--gutter);
+  padding-left: var(--gutter);
+  margin-right: auto;
+  margin-left: auto;
+
+  &--fluid {
+    max-width: none;
+  }
+
+  &--xsmall {
+    max-width: var(--mw-xsm);
+  }
+
+  &--small {
+    max-width: var(--mw-sm);
+  }
+
+  &--medium {
+    max-width: var(--mw-md);
+  }
+
+  &--large {
+    max-width: var(--mw-lg);
+  }
+}
+
+// General styling
+.caption {
+  margin-bottom: 1.5rem;
+  @media (min-width: 992px) {
+    margin-bottom: 0rem;
+  }
+}
+
+section,
+.section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  @media (min-width: 768px) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+button {
+  border: none;
+  padding: 15px;
+  font-weight: var(--fw-a);
+  cursor: none;
+}
+
+.color-blend {
+  mix-blend-mode: difference;
+}
+
+.logo {
+  color: white;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+a:hover > #cursor {
+  transform: scale(3);
+}
+
+// Button hover styling
+.button-hover-white {
+  opacity: 0.99 !important;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid var(--clr-white);
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  color: var(--clr-white);
+  &:after {
+    position: absolute;
+    transition: 0.3s;
+    content: '';
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    height: 3px;
+    background: var(--clr-white);
+    height: 120%;
+    left: -10%;
+    transform: skewX(-25deg);
+    z-index: -1;
+  }
+  &:hover {
+    color: var(--clr-secondary) !important;
+    &:after {
+      width: 100%;
+      left: 0;
+    }
+    &:after {
+      left: -10%;
+      width: 120%;
+    }
+  }
+}
+
+.button-hover-black {
+  opacity: 0.99;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid var(--clr-secondary);
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  color: var(--clr-secondary);
+  &:after {
+    position: absolute;
+    transition: 0.3s;
+    content: '';
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    height: 3px;
+    background: var(--clr-secondary);
+    height: 120%;
+    left: -10%;
+    transform: skewX(-25deg);
+    z-index: -1;
+  }
+  &:hover {
+    color: var(--clr-white) !important;
+    &:after {
+      width: 100%;
+      left: 0;
+    }
+    &:after {
+      left: -10%;
+      width: 120%;
+    }
+  }
+}
+
+.links-hover {
+  &:hover {
+    opacity: 0.5 !important;
+    transition: 0.3s;
+  }
+}
+
+.filled-button-hover {
+  opacity: 0.99 !important;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid var(--clr-white);
+  @media (min-width: 992px) {
+    border: 1px solid var(--clr-secondary);
+  }
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  &:after {
+    position: absolute;
+    transition: 0.3s;
+    content: '';
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    height: 3px;
+    background: var(--clr-secondary);
+    @media (min-width: 992px) {
+      background: var(--clr-grey);
+    }
+    height: 120%;
+    left: -10%;
+    transform: skewX(-25deg);
+    z-index: -1;
+  }
+  &:hover {
+    color: var(--clr-white) !important;
+    @media (min-width: 992px) {
+      color: var(--clr-secondary) !important;
+    }
+    &:after {
+      width: 100%;
+      left: 0;
+    }
+    &:after {
+      left: -10%;
+      width: 120%;
+    }
+  }
+}
+
+html {
+  background: var(--clr-primary);
+}
+
+// Keyframe animations
+
+.remove-preloader {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s 600ms, visibility 0s 850ms;
+}
+
+@keyframes loading {
+  from {
+    background: var(--clr-primary);
+  }
+
+  to {
+    background: var(--clr-secondary);
+  }
+}
+
+@keyframes changeHeight {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
